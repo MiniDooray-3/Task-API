@@ -1,0 +1,41 @@
+POST localhost:8083/api/projects
+Content-Type: application/json
+
+{
+  "projectName": "testProject",
+  "memberId": "testId"
+}
+
+###
+
+GET 10.220.222.62:8081/api/projects/hello/list
+
+
+###
+
+GET 10.220.222.62:8081/api/projects/2
+
+###
+
+PUT localhost:8081/api/projects
+Content-Type: application/json
+
+{
+  "projectId": 1,
+  "status": "111줭"
+}
+
+###
+
+POST 10.220.222.62:8083/api/members/register
+Content-Type: application/json
+
+{
+  "memberId" : "dello",
+  "projectId" : 1,
+  "role" : "admin"
+}
+
+###
+
+GET 10.220.222.62:8081/api/members/hello/1
