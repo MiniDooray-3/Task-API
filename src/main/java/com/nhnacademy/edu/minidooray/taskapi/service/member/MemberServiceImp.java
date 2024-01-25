@@ -45,8 +45,7 @@ public class MemberServiceImp implements MemberService {
      @Transactional
      public MemberResponse getMember(String memberId, Long projectId) {
           MemberResponse memberResponse = memberRepository.findByMemberIdAndProjectId_ProjectId(memberId, projectId);
-//          System.out.println(memberResponse.getMemberId());
-//          System.out.println(memberResponse.getMemberRole());
+
           if(Objects.isNull(memberResponse))
                throw new MemberNotFoundException("Member Not Found Exception");
           return memberResponse;

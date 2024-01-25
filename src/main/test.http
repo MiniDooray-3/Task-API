@@ -39,3 +39,30 @@ Content-Type: application/json
 ###
 
 GET 10.220.222.62:8081/api/members/hello/1
+
+###
+
+POST localhost:8083/api/milestones
+Content-Type: application/json
+
+{
+  "projectId" : 13,
+  "milestoneStatus" : "pass"
+}
+
+###
+
+PUT localhost:8083/api/milestones/1
+Content-Type: application/json
+
+{
+  "mileStoneStatus" : "update"
+}
+
+###
+
+GET localhost:8083/api/milestones/13
+
+###
+
+DELETE localhost:8083/api/milestones/5
