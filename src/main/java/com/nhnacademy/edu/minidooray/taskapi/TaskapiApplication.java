@@ -1,13 +1,13 @@
-package com.nhnacademy.edu.springboot.TaskAPI;
+package com.nhnacademy.edu.minidooray.taskapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TaskApiApplication {
+public class TaskapiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaskApiApplication.class, args);
+		SpringApplication.run(TaskapiApplication.class, args);
 	}
 
 }

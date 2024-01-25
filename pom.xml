@@ -8,10 +8,10 @@
 		<version>2.7.18</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.nhnacademy.edu.springboot</groupId>
-	<artifactId>Task-API</artifactId>
+	<groupId>com.nhnacademy.edu.minidooray</groupId>
+	<artifactId>taskapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Task-API</name>
+	<name>taskapi</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>

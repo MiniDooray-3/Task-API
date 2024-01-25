@@ -1,10 +1,10 @@
-package com.nhnacademy.edu.springboot.TaskAPI;
+package com.nhnacademy.edu.minidooray.taskapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TaskApiApplicationTests {
+class TaskapiApplicationTests {
 
 	@Test
 	void contextLoads() {
