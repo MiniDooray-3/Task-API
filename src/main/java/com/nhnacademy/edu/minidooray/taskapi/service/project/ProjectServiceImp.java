@@ -1,5 +1,6 @@
 package com.nhnacademy.edu.minidooray.taskapi.service.project;
 
+import com.nhnacademy.edu.minidooray.taskapi.domain.Member;
 import com.nhnacademy.edu.minidooray.taskapi.domain.Project;
 import com.nhnacademy.edu.minidooray.taskapi.dto.project.ProjectRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.project.ProjectUpdateRequest;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -45,18 +47,23 @@ public class ProjectServiceImp implements ProjectService{
 
      @Override
      public List<Project> getProjectList(String memberId) {
-
-
           return projectRepository.getBy(memberId)
                   .orElseThrow(() -> new ProjectNotFoundException("Project Not Found"));
      }
 
      @Override
+     @Transactional
      public void createProject(ProjectRegisterRequest registerRequest) {
 
           Project project = new Project();
           project.setProjectName(registerRequest.getProjectName());
           project.setProjectStatus("활성");
+          Member member = new Member();
+          member.setProjectId(project);
+          member.setMemberRole("ADMIN");
+          member.setMemberId(registerRequest.getMemberId());
+
+          memberRepository.save(member);
           projectRepository.save(project);
      }
 }

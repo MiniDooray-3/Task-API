@@ -35,7 +35,7 @@ public class MemberServiceImp implements MemberService {
 
           Member member = new Member();
           member.setMemberId(registerRequest.getMemberId());
-          member.setMemberRole("관리자");
+          member.setMemberRole(registerRequest.getRole());
           member.setProjectId(project);
 
           memberRepository.save(member);
