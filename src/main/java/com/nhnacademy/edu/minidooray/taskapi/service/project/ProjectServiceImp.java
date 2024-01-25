@@ -38,7 +38,6 @@ public class ProjectServiceImp implements ProjectService{
           projectRepository.saveAndFlush(storageProject);
      }
 
-     // 생각.
      @Override
      public List<ProjectResponse> getProjects(String memberId) {
           return projectRepository.getProjectsBy(memberId);

@@ -31,7 +31,7 @@ public class ProjectController {
      }
 
      @GetMapping("/api/projects/{member_id}/list")
-     @ResponseStatus(HttpStatus.CREATED)
+     @ResponseStatus(HttpStatus.OK)
      public ResponseEntity<List<Project>> getMemberOfProject(@PathVariable("member_id") String id) {
           return ResponseEntity.ok(projectService.getProjectList(id));
      }
