@@ -1,8 +1,24 @@
 package com.nhnacademy.edu.minidooray.taskapi.dto.task;
 
-public interface TaskResponse {
-     Long getTaskId();
+import com.nhnacademy.edu.minidooray.taskapi.domain.MileStone;
+import com.nhnacademy.edu.minidooray.taskapi.domain.Project;
 
-     String taskTitle();
-     String taskContent();
+public interface TaskResponse {
+     String getTaskTitle();
+
+     String getTaskContent();
+
+     ProjectDto getProjectId();
+
+     MileStoneDto getMileStoneId();
+
+     interface MileStoneDto{
+          Long getMileStoneId();
+          String getMileStoneStatus();
+     }
+
+     interface ProjectDto{
+          Long getProjectId();
+          String getProjectName();
+     }
 }

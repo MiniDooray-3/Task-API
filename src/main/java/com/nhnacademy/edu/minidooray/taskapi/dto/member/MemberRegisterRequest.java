@@ -6,5 +6,5 @@ import lombok.Data;
 public class MemberRegisterRequest {
      private String memberId;
      private Long projectId;
-     private String role;
+     private String memberRole;
 }

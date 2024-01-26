@@ -4,6 +4,7 @@ import com.nhnacademy.edu.minidooray.taskapi.dto.member.MemberRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.member.MemberResponse;
 import com.nhnacademy.edu.minidooray.taskapi.repository.MemberRepository;
 import com.nhnacademy.edu.minidooray.taskapi.service.member.MemberService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,5 +35,13 @@ public class MemberController {
              @PathVariable("project_id") Long projectId
      ){
           return ResponseEntity.ok(memberService.getMember(memberId, projectId));
+     }
+
+     @GetMapping("/api/members/{project_id}")
+     @ResponseStatus(HttpStatus.OK)
+     public ResponseEntity<List<MemberResponse>> getMembers(
+             @PathVariable("project_id") Long projectId
+     ){
+          return ResponseEntity.ok(memberService.getMembers(projectId));
      }
 }

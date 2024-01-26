@@ -10,10 +10,15 @@ Content-Type: application/json
 
 GET 10.220.222.62:8081/api/projects/hello/list
 
+###
+GET 10.220.222.62:8081/api/members/13
+###
+
+GET localhost:8083/api/members/13
 
 ###
 
-GET 10.220.222.62:8081/api/projects/2
+GET localhost:8083/api/projects/13
 
 ###
 
@@ -27,18 +32,19 @@ Content-Type: application/json
 
 ###
 
-POST 10.220.222.62:8083/api/members/register
+#POST 10.220.222.62:8081/api/members/register
+POST localhost:8083/api/members/register
 Content-Type: application/json
 
 {
-  "memberId" : "dello",
-  "projectId" : 1,
-  "role" : "admin"
+  "memberId" : "aello",
+  "projectId" : 13,
+  "memberRole" : "MEMBER"
 }
 
 ###
 
-GET 10.220.222.62:8081/api/members/hello/1
+GET localhost:8083/api/members/admin/13
 
 ###
 
@@ -94,3 +100,45 @@ Content-Type: application/json
 
 DELETE  localhost:8083/api/tags/1
 
+
+###
+
+POST localhost:8083/api/task
+Content-Type: application/json
+
+{
+  "taskTitle": "title",
+  "taskContent": "content",
+  "projectId": 13
+}
+
+###
+DELETE localhost:8083/api/tasks/1
+###
+#PUT localhost:8083/api/tasks/2
+#Content-Type: application/json
+
+###
+GET localhost:8083/api/tasks/2
+
+###
+
+POST localhost:8083/api/tasks
+Content-Type: application/json
+
+{
+  "taskTitle" : "title",
+  "taskContent": "content",
+  "projectId": 13,
+  "milestoneId": 12,
+  "tagId": [
+    2, 3, 4
+  ]
+}
+
+###
+
+DELETE localhost:8083/api/tasks/12
+
+###
+GET localhost:8083/api/tasks/13

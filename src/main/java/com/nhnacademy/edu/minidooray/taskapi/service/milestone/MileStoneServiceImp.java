@@ -50,7 +50,7 @@ public class MileStoneServiceImp implements MileStoneService {
      @Override
      public void updateMileStone(Long mileStoneId, MileStoneUpdateRequest updateRequest) {
           MileStone storageMileStone = mileStoneRepository.findById(mileStoneId)
-                  .orElseThrow(MileStoneNotFoundException::new);
+                  .orElseThrow(() -> new MileStoneNotFoundException("MileStone Not Found"));
 
           storageMileStone.setMileStoneStatus(updateRequest.getMileStoneStatus());
           mileStoneRepository.saveAndFlush(storageMileStone);
@@ -60,7 +60,7 @@ public class MileStoneServiceImp implements MileStoneService {
      @Transactional
      public void deleteMileStone(Long mileStoneId) {
           MileStone storageMileStone = mileStoneRepository.findById(mileStoneId)
-                  .orElseThrow(MileStoneNotFoundException::new);
+                  .orElseThrow(() -> new MileStoneNotFoundException("MileStone Not Found"));
 
           mileStoneRepository.delete(storageMileStone);
      }

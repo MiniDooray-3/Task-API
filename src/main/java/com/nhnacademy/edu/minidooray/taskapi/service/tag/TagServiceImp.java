@@ -12,6 +12,7 @@ import com.nhnacademy.edu.minidooray.taskapi.repository.TagRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,12 +33,14 @@ public class TagServiceImp implements TagService{
      }
 
      @Override
+     @Transactional(readOnly = true)
      public List<TagResponse> getTagList(Long projectId) {
           projectFindById(projectId);
           return tagRepository.findByProjectId_ProjectId(projectId);
      }
 
      @Override
+     @Transactional
      public void updateTag(Long tagId, TagUpdateRequest updateRequest) {
           Tag storageTag =tagFindById(tagId);
 
@@ -46,6 +49,7 @@ public class TagServiceImp implements TagService{
      }
 
      @Override
+     @Transactional
      public void deleteTag(Long tagId) {
           Tag storageTag = tagFindById(tagId);
 
