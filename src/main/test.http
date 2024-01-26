@@ -66,3 +66,31 @@ GET localhost:8083/api/milestones/13
 ###
 
 DELETE localhost:8083/api/milestones/5
+
+###
+
+POST localhost:8083/api/tags
+Content-Type: application/json
+
+{
+  "tagName": "positive2",
+  "projectId": 13
+}
+
+###
+
+GET localhost:8083/api/tags/1
+
+
+###
+PUT  localhost:8083/api/tags/2
+Content-Type: application/json
+
+{
+  "tagName" : "update"
+}
+
+###
+
+DELETE  localhost:8083/api/tags/1
+

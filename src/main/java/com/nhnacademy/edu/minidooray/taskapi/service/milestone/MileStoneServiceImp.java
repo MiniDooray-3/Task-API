@@ -5,7 +5,6 @@ import com.nhnacademy.edu.minidooray.taskapi.domain.Project;
 import com.nhnacademy.edu.minidooray.taskapi.dto.milestone.MileStoneRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.milestone.MileStoneResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.milestone.MileStoneUpdateRequest;
-import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.exception.MileStoneNotFoundException;
 import com.nhnacademy.edu.minidooray.taskapi.exception.MileStoneStatusAlreadyExistsException;
 import com.nhnacademy.edu.minidooray.taskapi.exception.ProjectNotFoundException;
@@ -16,11 +15,10 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Service
 @RequiredArgsConstructor
-public class MileStoneServiceImp implements MileStoneService{
+public class MileStoneServiceImp implements MileStoneService {
 
      private final MileStoneRepository mileStoneRepository;
      private final ProjectRepository projectRepository;
@@ -32,8 +30,9 @@ public class MileStoneServiceImp implements MileStoneService{
 
           Optional<MileStone> optionalMileStone = mileStoneRepository
                   .findByMileStoneStatus(registerRequest.getMilestoneStatus());
-          if(optionalMileStone.isPresent())
+          if (optionalMileStone.isPresent()) {
                throw new MileStoneStatusAlreadyExistsException();
+          }
 
           MileStone mileStone = new MileStone();
           mileStone.setMileStoneStatus(registerRequest.getMilestoneStatus());
@@ -51,7 +50,7 @@ public class MileStoneServiceImp implements MileStoneService{
      @Override
      public void updateMileStone(Long mileStoneId, MileStoneUpdateRequest updateRequest) {
           MileStone storageMileStone = mileStoneRepository.findById(mileStoneId)
-                  .orElseThrow(()-> new MileStoneNotFoundException());
+                  .orElseThrow(MileStoneNotFoundException::new);
 
           storageMileStone.setMileStoneStatus(updateRequest.getMileStoneStatus());
           mileStoneRepository.saveAndFlush(storageMileStone);
@@ -61,12 +60,12 @@ public class MileStoneServiceImp implements MileStoneService{
      @Transactional
      public void deleteMileStone(Long mileStoneId) {
           MileStone storageMileStone = mileStoneRepository.findById(mileStoneId)
-                  .orElseThrow(()-> new MileStoneNotFoundException());
+                  .orElseThrow(MileStoneNotFoundException::new);
 
           mileStoneRepository.delete(storageMileStone);
      }
 
-     private Project projectNotFound(Long projectId){
+     private Project projectNotFound(Long projectId) {
           return projectRepository.findById(projectId)
                   .orElseThrow(() ->
                           new ProjectNotFoundException("location : milestoneCreate, Project Not Found Exception"));

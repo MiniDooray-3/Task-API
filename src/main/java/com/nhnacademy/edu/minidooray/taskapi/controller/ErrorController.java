@@ -6,6 +6,7 @@ import com.nhnacademy.edu.minidooray.taskapi.exception.MileStoneNotFoundExceptio
 import com.nhnacademy.edu.minidooray.taskapi.exception.MileStoneStatusAlreadyExistsException;
 import com.nhnacademy.edu.minidooray.taskapi.exception.ProjectAlreadyExistsException;
 import com.nhnacademy.edu.minidooray.taskapi.exception.ProjectNotFoundException;
+import com.nhnacademy.edu.minidooray.taskapi.exception.TagNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -23,7 +24,7 @@ public class ErrorController {
 
      @ExceptionHandler(value = {
              ProjectNotFoundException.class, MemberNotFoundException.class,
-             MileStoneNotFoundException.class
+             MileStoneNotFoundException.class, TagNotFoundException.class
      })
      @ResponseStatus(HttpStatus.NOT_FOUND)
      public void handleNotFoundException() {
