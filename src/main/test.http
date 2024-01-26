@@ -128,7 +128,7 @@ GET localhost:8083/api/tasks/13
 
 ###
 
-POST localhost:8083/api/tasks
+POST 10.220.222.62:8081/api/tasks
 Content-Type: application/json
 
 {
@@ -136,7 +136,7 @@ Content-Type: application/json
   "taskContent": "content",
   "projectId": 13,
   "milestoneId": 12,
-  "tagId": [2, 3]
+  "tagId": []
 }
 
 ###
@@ -144,15 +144,19 @@ Content-Type: application/json
 DELETE localhost:8083/api/tasks/41
 
 ###
-GET localhost:8083/api/projects/tasks/1
+GET localhost:8083/api/projects/tasks/14
 
 ###
 
-PUT localhost:8083/api/tasks/42
+PUT 10.220.222.62:8081/api/tasks/44
 Content-Type: application/json
 
 {
   "taskContent" : "변경?",
   "milestoneId" :12,
-  "tagId" : null
+  "tagId" : [1]
 }
+
+###
+
+GET localhost:8083/api/task/tag/44

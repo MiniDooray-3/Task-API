@@ -59,7 +59,6 @@ public class TaskServiceImp implements TaskService {
           }
      }
 
-     // TODO
      @Override
      @Transactional
      public void updateTask(Long taskId, TaskUpdateRequest updateRequest) {
@@ -79,7 +78,6 @@ public class TaskServiceImp implements TaskService {
 
           storageTask.updateTask(updateRequest.getTaskContent(), storageMileStone, taskTagList);
 
-//          taskRepository.save(storageTask);
           if(Objects.nonNull(taskTagList)) {
                taskTagRepository.saveAll(taskTagList);
           }

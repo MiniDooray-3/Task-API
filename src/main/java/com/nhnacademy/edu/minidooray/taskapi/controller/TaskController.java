@@ -1,5 +1,6 @@
 package com.nhnacademy.edu.minidooray.taskapi.controller;
 
+import com.nhnacademy.edu.minidooray.taskapi.domain.Task;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskUpdateRequest;
@@ -36,6 +37,7 @@ public class TaskController {
      public ResponseEntity<List<TasksResponse>> getTask(@PathVariable("project_id") Long projectId){
           return ResponseEntity.ok(taskService.getTasks(projectId));
      }
+
 
      @PostMapping("/api/tasks")
      @ResponseStatus(HttpStatus.CREATED)
