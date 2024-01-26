@@ -4,6 +4,7 @@ import com.nhnacademy.edu.minidooray.taskapi.domain.Task;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskUpdateRequest;
+import com.nhnacademy.edu.minidooray.taskapi.dto.task.TasksResponse;
 import java.util.List;
 
 public interface TaskService {
@@ -11,7 +12,6 @@ public interface TaskService {
      void updateTask(Long taskId, TaskUpdateRequest updateRequest);
      void deleteTask(Long taskId);
      TaskResponse getTask(Long taskId);
-     List<Task> getTastt(Long taskId);
-//     List<>
+     List<TasksResponse> getTasks(Long projectId);
 
 }

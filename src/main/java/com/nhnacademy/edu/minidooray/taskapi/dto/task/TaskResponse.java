@@ -8,9 +8,9 @@ public interface TaskResponse {
 
      String getTaskContent();
 
-     ProjectDto getProjectId();
+     ProjectDto getProject();
 
-     MileStoneDto getMileStoneId();
+     MileStoneDto getMileStone();
 
      interface MileStoneDto{
           Long getMileStoneId();

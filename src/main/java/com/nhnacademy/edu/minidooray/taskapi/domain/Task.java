@@ -31,11 +31,11 @@ public class Task {
 
      @ManyToOne
      @JoinColumn(name = "mile_stone_id")
-     private MileStone mileStoneId;
+     private MileStone mileStone;
 
      @ManyToOne
      @JoinColumn(name = "project_id")
-     private Project projectId;
+     private Project project;
 
      @Column(name = "task_title")
      private String taskTitle;
@@ -43,13 +43,19 @@ public class Task {
      @Column(name = "task_content", columnDefinition = "TEXT")
      private String taskContent;
 
-     @OneToMany(mappedBy = "taskId", cascade = CascadeType.REMOVE)
+     @OneToMany(mappedBy = "taskId", cascade = {CascadeType.REMOVE})
      private List<TaskTag> tags;
 
      public Task(MileStone mileStoneId, Project projectId, String taskTitle, String taskContent){
-          this.mileStoneId = mileStoneId;
-          this.projectId = projectId;
+          this.mileStone = mileStoneId;
+          this.project = projectId;
           this.taskTitle = taskTitle;
           this.taskContent = taskContent;
+     }
+
+     public void updateTask(String taskContent, MileStone mileStone, List<TaskTag> tags){
+          this.taskContent = taskContent;
+          this.mileStone = mileStone;
+          this.tags = tags;
      }
 }

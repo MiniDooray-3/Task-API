@@ -3,7 +3,9 @@ package com.nhnacademy.edu.minidooray.taskapi.controller;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskUpdateRequest;
+import com.nhnacademy.edu.minidooray.taskapi.dto.task.TasksResponse;
 import com.nhnacademy.edu.minidooray.taskapi.service.task.TaskService;
+import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,8 +33,8 @@ public class TaskController {
      }
 
      @GetMapping("/api/projects/tasks/{project_id}")
-     public ResponseEntity<TaskResponse> getTask(@PathVariable("project_id") Long projectId){
-          return null;
+     public ResponseEntity<List<TasksResponse>> getTask(@PathVariable("project_id") Long projectId){
+          return ResponseEntity.ok(taskService.getTasks(projectId));
      }
 
      @PostMapping("/api/tasks")
@@ -44,7 +46,8 @@ public class TaskController {
      @PutMapping("/api/tasks/{task_id}")
      @ResponseStatus(HttpStatus.OK)
      public void putTasks(@PathVariable("task_id") Long taskId,
-                          @RequestBody TaskUpdateRequest updateRequest){
+                          @RequestBody TaskUpdateRequest updateRequest
+     ){
           taskService.updateTask(taskId, updateRequest);
      }
 

@@ -58,7 +58,7 @@ public class MemberServiceImp implements MemberService {
      @Transactional(readOnly = true)
      public List<MemberResponse> getMembers(Long projectId) {
           Project project = projectRepository.findById(projectId)
-                  .orElseThrow(() -> new ProjectNotFoundException("Project Not Found Id : "));
+                  .orElseThrow(() -> new ProjectNotFoundException("Project Not Found Id"));
           return memberRepository.findByProjectId(project);
      }
 }

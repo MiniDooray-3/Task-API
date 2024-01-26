@@ -7,6 +7,8 @@ Content-Type: application/json
 }
 
 ###
+GET 10.220.222.62:8081/api/projects/1
+###
 
 GET 10.220.222.62:8081/api/projects/hello/list
 
@@ -14,7 +16,7 @@ GET 10.220.222.62:8081/api/projects/hello/list
 GET 10.220.222.62:8081/api/members/13
 ###
 
-GET localhost:8083/api/members/13
+GET localhost:8083/api/members/1
 
 ###
 
@@ -85,8 +87,10 @@ Content-Type: application/json
 
 ###
 
-GET localhost:8083/api/tags/1
+GET localhost:8083/api/tags/13
 
+###
+GET 10.220.222.62:8081/api/tags/1
 
 ###
 PUT  localhost:8083/api/tags/2
@@ -119,7 +123,8 @@ DELETE localhost:8083/api/tasks/1
 #Content-Type: application/json
 
 ###
-GET localhost:8083/api/tasks/2
+GET localhost:8083/api/tasks/13
+
 
 ###
 
@@ -127,18 +132,27 @@ POST localhost:8083/api/tasks
 Content-Type: application/json
 
 {
-  "taskTitle" : "title",
+  "taskTitle" : "sadfasdfasdf",
   "taskContent": "content",
   "projectId": 13,
   "milestoneId": 12,
-  "tagId": [
-    2, 3, 4
-  ]
+  "tagId": [2, 3]
 }
 
 ###
 
-DELETE localhost:8083/api/tasks/12
+DELETE localhost:8083/api/tasks/41
 
 ###
-GET localhost:8083/api/tasks/13
+GET localhost:8083/api/projects/tasks/1
+
+###
+
+PUT localhost:8083/api/tasks/42
+Content-Type: application/json
+
+{
+  "taskContent" : "변경?",
+  "milestoneId" :12,
+  "tagId" : null
+}

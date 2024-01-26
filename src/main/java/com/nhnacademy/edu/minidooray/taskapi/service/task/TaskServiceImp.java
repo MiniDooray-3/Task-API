@@ -7,6 +7,7 @@ import com.nhnacademy.edu.minidooray.taskapi.domain.TaskTag;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskUpdateRequest;
+import com.nhnacademy.edu.minidooray.taskapi.dto.task.TasksResponse;
 import com.nhnacademy.edu.minidooray.taskapi.exception.MileStoneNotFoundException;
 import com.nhnacademy.edu.minidooray.taskapi.exception.ProjectNotFoundException;
 import com.nhnacademy.edu.minidooray.taskapi.exception.TaskNotFoundException;
@@ -16,6 +17,7 @@ import com.nhnacademy.edu.minidooray.taskapi.repository.TagRepository;
 import com.nhnacademy.edu.minidooray.taskapi.repository.TaskRepository;
 import com.nhnacademy.edu.minidooray.taskapi.repository.TaskTagRepository;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,13 +39,88 @@ public class TaskServiceImp implements TaskService {
      @Transactional
      public void createTask(TaskRegisterRequest registerRequest) {
           Project storageProject = projectFindById(registerRequest.getProjectId());
-          MileStone storageMileStone = mileStoneFindById(registerRequest.getMilestoneId());
+          MileStone storageMileStone = null;
 
-          Task task = new Task(storageMileStone, storageProject, registerRequest.getTaskTitle(),
-                  registerRequest.getTaskContent());
+          if(Objects.nonNull(registerRequest.getMilestoneId()))
+               storageMileStone = mileStoneFindById(registerRequest.getMilestoneId());
+
+          Task task = new Task(storageMileStone, storageProject,
+                  registerRequest.getTaskTitle(), registerRequest.getTaskContent());
           taskRepository.save(task);
 
-          List<TaskTag> taskTagList = registerRequest.getTagId().stream()
+          List<TaskTag> taskTagList  = null;
+          if(Objects.nonNull(registerRequest.getTagId()))
+               taskTagList = tagSetting(registerRequest.getTagId(), task);
+
+
+
+          if(Objects.nonNull(taskTagList)) {
+               taskTagRepository.saveAll(taskTagList);
+          }
+     }
+
+     // TODO
+     @Override
+     @Transactional
+     public void updateTask(Long taskId, TaskUpdateRequest updateRequest) {
+          Task storageTask = taskFindById(taskId);
+          if(storageTask.getTags() != null || !storageTask.getTags().isEmpty())
+               taskTagRepository.deleteByTaskId_TaskId(taskId);
+
+          MileStone storageMileStone = null;
+          if(Objects.nonNull(updateRequest.getMilestoneId())){
+               storageMileStone = mileStoneFindById(updateRequest.getMilestoneId());
+          }
+
+          List<TaskTag> taskTagList = null;
+          if(Objects.nonNull(updateRequest.getTagId())) {
+               taskTagList = tagSetting(updateRequest.getTagId(), storageTask);
+          }
+
+          storageTask.updateTask(updateRequest.getTaskContent(), storageMileStone, taskTagList);
+
+//          taskRepository.save(storageTask);
+          if(Objects.nonNull(taskTagList)) {
+               taskTagRepository.saveAll(taskTagList);
+          }
+     }
+
+     @Override
+     @Transactional(readOnly = true)
+     public TaskResponse getTask(Long taskId) {
+          return taskRepository.findBy(taskId)
+                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found Exception"));
+     }
+
+     @Override
+     public List<TasksResponse> getTasks(Long projectId) {
+          return taskRepository.findByProject(projectFindById(projectId));
+     }
+
+     @Override
+     @Transactional
+     public void deleteTask(Long taskId) {
+          Task storageTask = taskFindById(taskId);
+          taskRepository.delete(storageTask);
+     }
+
+     private Project projectFindById(Long projectId) {
+          return projectRepository.findById(projectId)
+                  .orElseThrow(() -> new ProjectNotFoundException("Project Not Found"));
+     }
+
+     private MileStone mileStoneFindById(Long mileStoneId) {
+          return mileStoneRepository.findById(mileStoneId)
+                  .orElseThrow(() -> new MileStoneNotFoundException("MileStone Not Found"));
+     }
+
+     private Task taskFindById(Long taskId){
+          return taskRepository.findById(taskId)
+                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found Exception"));
+     }
+
+     private List<TaskTag> tagSetting(List<Long > tagsList, Task task){
+               return tagsList.stream()
                   .map(tagId -> {
                        TaskTag taskTag = new TaskTag();
                        taskTag.setTaskTagPk(new TaskTag.TaskTagPk(task.getTaskId(), tagId));
@@ -55,46 +132,6 @@ public class TaskServiceImp implements TaskService {
                   })
                   .collect(Collectors.toList());
 
-          task.setTags(taskTagList);
-          taskTagRepository.saveAll(taskTagList);
-     }
-
-     // TODO
-     @Override
-     @Transactional
-     public void updateTask(Long taskId, TaskUpdateRequest updateRequest) {
-          Task storageTask = taskRepository.findById(taskId)
-                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found Exception"));
-
-
-     }
-
-     @Override
-     @Transactional(readOnly = true)
-     public TaskResponse getTask(Long taskId) {
-          return taskRepository.findByTaskId(taskId)
-                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found Exception"));
-     }
-
-     @Override
-     public List<Task> getTastt(Long taskId) {
-          return taskRepository.findAll();
-     }
-
-     @Override
-     @Transactional
-     public void deleteTask(Long taskId) {
-          taskRepository.deleteById(taskId);
-     }
-
-     private Project projectFindById(Long projectId) {
-          return projectRepository.findById(projectId)
-                  .orElseThrow(() -> new ProjectNotFoundException("Project Not Found"));
-     }
-
-     private MileStone mileStoneFindById(Long mileStoneId) {
-          return mileStoneRepository.findById(mileStoneId)
-                  .orElseThrow(() -> new MileStoneNotFoundException("MileStone Not Found"));
      }
 
 }
