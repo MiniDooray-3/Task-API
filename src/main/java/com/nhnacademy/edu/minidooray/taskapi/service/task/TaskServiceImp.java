@@ -67,8 +67,8 @@ public class TaskServiceImp implements TaskService {
                taskTagRepository.deleteByTaskId_TaskId(taskId);
 
           MileStone storageMileStone = null;
-          if(Objects.nonNull(updateRequest.getMilestoneId())){
-               storageMileStone = mileStoneFindById(updateRequest.getMilestoneId());
+          if(Objects.nonNull(updateRequest.getMileStoneId())){
+               storageMileStone = mileStoneFindById(updateRequest.getMileStoneId());
           }
 
           List<TaskTag> taskTagList = null;
@@ -118,7 +118,7 @@ public class TaskServiceImp implements TaskService {
      }
 
      private List<TaskTag> tagSetting(List<Long > tagsList, Task task){
-               return tagsList.stream()
+          return tagsList.stream()
                   .map(tagId -> {
                        TaskTag taskTag = new TaskTag();
                        taskTag.setTaskTagPk(new TaskTag.TaskTagPk(task.getTaskId(), tagId));

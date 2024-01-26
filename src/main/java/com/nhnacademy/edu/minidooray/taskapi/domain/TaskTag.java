@@ -1,6 +1,7 @@
 package com.nhnacademy.edu.minidooray.taskapi.domain;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
@@ -32,7 +33,7 @@ public class TaskTag {
      private Task taskId;
 
      @MapsId("tagId")
-     @ManyToOne
+     @ManyToOne (cascade = CascadeType.REMOVE)
      @JoinColumn(name = "tag_id")
      private Tag tagId;
 
