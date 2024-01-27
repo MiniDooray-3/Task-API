@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,7 +32,7 @@ public class TaskTag {
      private Task taskId;
 
      @MapsId("tagId")
-     @ManyToOne (cascade = CascadeType.REMOVE)
+     @ManyToOne(cascade = CascadeType.REMOVE)
      @JoinColumn(name = "tag_id")
      private Tag tagId;
 
