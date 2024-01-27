@@ -1,7 +1,6 @@
 package com.nhnacademy.edu.minidooray.taskapi.dto.comment;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

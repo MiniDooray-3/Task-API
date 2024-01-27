@@ -1,6 +1,5 @@
 package com.nhnacademy.edu.minidooray.taskapi.dto.member;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import lombok.Data;

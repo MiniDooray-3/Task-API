@@ -8,5 +8,5 @@ import lombok.Data;
 public class MileStoneUpdateRequest {
      @NotBlank
      @Size(max = 10)
-     String mileStoneStatus;
+     private String mileStoneStatus;
 }

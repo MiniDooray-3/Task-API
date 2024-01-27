@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class TagOnlyIdRequest {
-     Long tagId;
+     private Long tagId;
 }

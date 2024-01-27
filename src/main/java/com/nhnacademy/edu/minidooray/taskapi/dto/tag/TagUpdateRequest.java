@@ -8,5 +8,5 @@ import lombok.Data;
 public class TagUpdateRequest {
      @NotBlank
      @Size(max = 10)
-      String tagName;
+      private String tagName;
 }
