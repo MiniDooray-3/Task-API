@@ -11,8 +11,8 @@ import lombok.Setter;
 @Setter
 public class CommentRegisterRequest {
 
-    private String content;
-    private Long taskId;
-    private String memberId;
-    private Long projectId;
+     private String content;
+     private Long taskId;
+     private String memberId;
+     private Long projectId;
 }

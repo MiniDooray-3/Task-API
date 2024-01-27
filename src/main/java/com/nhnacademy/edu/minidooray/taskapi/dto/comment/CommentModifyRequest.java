@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CommentModifyRequest {
-    private String commentContent;
+     private String commentContent;
 }

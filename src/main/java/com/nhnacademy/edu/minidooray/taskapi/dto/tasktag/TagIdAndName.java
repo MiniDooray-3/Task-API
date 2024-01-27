@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TagIdAndName {
-    private String tagName;
-    private Long tagId;
+     private String tagName;
+     private Long tagId;
 }
