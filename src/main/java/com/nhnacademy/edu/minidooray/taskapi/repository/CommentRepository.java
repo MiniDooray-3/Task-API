@@ -2,6 +2,7 @@ package com.nhnacademy.edu.minidooray.taskapi.repository;
 
 import com.nhnacademy.edu.minidooray.taskapi.domain.Comment;
 import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentIdAndContent;
+import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentOnlyIdResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentResponse;
 import java.util.List;
 import java.util.Optional;
@@ -17,4 +18,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<CommentResponse> findAllByTaskId(Long taskId);
 
     Optional<CommentIdAndContent> findCommentByCommentId(Long commentId);
+
+    @Query("select c from Comment c where c.taskId.taskId = ?1")
+    List<Comment> findByTaskId(Long taskId);
 }

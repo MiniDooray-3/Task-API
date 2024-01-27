@@ -51,7 +51,7 @@ public class ErrorController {
              ValidationFailedException.class
      })
      public ResponseEntity<RuntimeException> handleValidationException(RuntimeException e) {
-          log.error("{}", e.getMessage());
+          log.error("validException : {}", e.getMessage());
           return ResponseEntity
                   .status(HttpStatus.BAD_REQUEST)
                   .header(ERROR, e.getMessage())

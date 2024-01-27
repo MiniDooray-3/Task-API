@@ -177,10 +177,10 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "content" : "",
-  "taskId" : 25,
-  "memberId" : "admin",
-  "projectId" : 14
+  "content" : "dsds",
+  "taskId" : 13,
+  "memberId" : "testId",
+  "projectId" : 13
 }
 
 ###
@@ -202,3 +202,30 @@ Accept: application/json
 {
   "commentContent" : "test??"
 }
+
+###
+POST localhost:8083/api/tasks
+Content-Type: application/json
+
+{
+  "taskTitle" : "sadfasdfasdf",
+  "taskContent": "content",
+  "projectId": 13,
+  "milestoneId": 12,
+  "tagId": []
+}
+###
+
+POST localhost:8083/api/comments
+Content-Type: application/json
+Accept: application/json
+
+{
+  "content" : "dsds",
+  "taskId" : 47,
+  "memberId" : "testId",
+  "projectId" : 13
+}
+
+###
+DELETE localhost:8083/api/tasks/47
