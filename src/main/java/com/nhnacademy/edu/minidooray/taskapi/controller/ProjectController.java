@@ -2,9 +2,8 @@ package com.nhnacademy.edu.minidooray.taskapi.controller;
 
 import com.nhnacademy.edu.minidooray.taskapi.domain.Project;
 import com.nhnacademy.edu.minidooray.taskapi.dto.project.ProjectRegisterRequest;
-import com.nhnacademy.edu.minidooray.taskapi.dto.project.ProjectUpdateRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.project.ProjectResponse;
-import com.nhnacademy.edu.minidooray.taskapi.repository.ProjectRepository;
+import com.nhnacademy.edu.minidooray.taskapi.dto.project.ProjectUpdateRequest;
 import com.nhnacademy.edu.minidooray.taskapi.service.project.ProjectService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

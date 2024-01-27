@@ -2,7 +2,6 @@ package com.nhnacademy.edu.minidooray.taskapi.controller;
 
 import com.nhnacademy.edu.minidooray.taskapi.dto.member.MemberRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.member.MemberResponse;
-import com.nhnacademy.edu.minidooray.taskapi.repository.MemberRepository;
 import com.nhnacademy.edu.minidooray.taskapi.service.member.MemberService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ public class MemberController {
 
      @PostMapping("/api/members/register")
      @ResponseStatus(HttpStatus.CREATED)
-     public void postMembers(@RequestBody MemberRegisterRequest registerRequest){
+     public void postMembers(@RequestBody MemberRegisterRequest registerRequest) {
           memberService.createMembers(registerRequest);
      }
 
@@ -33,7 +32,7 @@ public class MemberController {
      public ResponseEntity<MemberResponse> getMember(
              @PathVariable("member_id") String memberId,
              @PathVariable("project_id") Long projectId
-     ){
+     ) {
           return ResponseEntity.ok(memberService.getMember(memberId, projectId));
      }
 
@@ -41,7 +40,7 @@ public class MemberController {
      @ResponseStatus(HttpStatus.OK)
      public ResponseEntity<List<MemberResponse>> getMembers(
              @PathVariable("project_id") Long projectId
-     ){
+     ) {
           return ResponseEntity.ok(memberService.getMembers(projectId));
      }
 }

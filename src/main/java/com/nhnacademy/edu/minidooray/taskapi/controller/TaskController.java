@@ -1,13 +1,11 @@
 package com.nhnacademy.edu.minidooray.taskapi.controller;
 
-import com.nhnacademy.edu.minidooray.taskapi.domain.Task;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskUpdateRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TasksResponse;
 import com.nhnacademy.edu.minidooray.taskapi.service.task.TaskService;
 import java.util.List;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,19 +27,19 @@ public class TaskController {
      private final TaskService taskService;
 
      @GetMapping("/api/tasks/{task_id}")
-     public ResponseEntity<TaskResponse> getTasks(@PathVariable("task_id") Long taskId){
+     public ResponseEntity<TaskResponse> getTasks(@PathVariable("task_id") Long taskId) {
           return ResponseEntity.ok(taskService.getTask(taskId));
      }
 
      @GetMapping("/api/projects/tasks/{project_id}")
-     public ResponseEntity<List<TasksResponse>> getTask(@PathVariable("project_id") Long projectId){
+     public ResponseEntity<List<TasksResponse>> getTask(@PathVariable("project_id") Long projectId) {
           return ResponseEntity.ok(taskService.getTasks(projectId));
      }
 
 
      @PostMapping("/api/tasks")
      @ResponseStatus(HttpStatus.CREATED)
-     public void postTasks(@RequestBody TaskRegisterRequest registerRequest){
+     public void postTasks(@RequestBody TaskRegisterRequest registerRequest) {
           taskService.createTask(registerRequest);
      }
 
@@ -49,13 +47,13 @@ public class TaskController {
      @ResponseStatus(HttpStatus.OK)
      public void putTasks(@PathVariable("task_id") Long taskId,
                           @RequestBody TaskUpdateRequest updateRequest
-     ){
+     ) {
           taskService.updateTask(taskId, updateRequest);
      }
 
      @DeleteMapping("/api/tasks/{task_id}")
      @ResponseStatus(HttpStatus.OK)
-     public void deleteTasks(@PathVariable("task_id") Long taskId){
+     public void deleteTasks(@PathVariable("task_id") Long taskId) {
           taskService.deleteTask(taskId);
      }
 }
