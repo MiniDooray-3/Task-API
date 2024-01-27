@@ -41,20 +41,21 @@ public class TaskServiceImp implements TaskService {
           Project storageProject = projectFindById(registerRequest.getProjectId());
           MileStone storageMileStone = null;
 
-          if(Objects.nonNull(registerRequest.getMilestoneId()))
+          if (Objects.nonNull(registerRequest.getMilestoneId())) {
                storageMileStone = mileStoneFindById(registerRequest.getMilestoneId());
+          }
 
           Task task = new Task(storageMileStone, storageProject,
                   registerRequest.getTaskTitle(), registerRequest.getTaskContent());
           taskRepository.save(task);
 
-          List<TaskTag> taskTagList  = null;
-          if(Objects.nonNull(registerRequest.getTagId()))
+          List<TaskTag> taskTagList = null;
+          if (Objects.nonNull(registerRequest.getTagId())) {
                taskTagList = tagSetting(registerRequest.getTagId(), task);
+          }
 
 
-
-          if(Objects.nonNull(taskTagList)) {
+          if (Objects.nonNull(taskTagList)) {
                taskTagRepository.saveAll(taskTagList);
           }
      }
@@ -63,22 +64,23 @@ public class TaskServiceImp implements TaskService {
      @Transactional
      public void updateTask(Long taskId, TaskUpdateRequest updateRequest) {
           Task storageTask = taskFindById(taskId);
-          if(storageTask.getTags() != null || !storageTask.getTags().isEmpty())
+          if (storageTask.getTags() != null) {
                taskTagRepository.deleteByTaskId_TaskId(taskId);
+          }
 
           MileStone storageMileStone = null;
-          if(Objects.nonNull(updateRequest.getMileStoneId())){
+          if (Objects.nonNull(updateRequest.getMileStoneId())) {
                storageMileStone = mileStoneFindById(updateRequest.getMileStoneId());
           }
 
           List<TaskTag> taskTagList = null;
-          if(Objects.nonNull(updateRequest.getTagId())) {
+          if (Objects.nonNull(updateRequest.getTagId())) {
                taskTagList = tagSetting(updateRequest.getTagId(), storageTask);
           }
 
           storageTask.updateTask(updateRequest.getTaskContent(), storageMileStone, taskTagList);
 
-          if(Objects.nonNull(taskTagList)) {
+          if (Objects.nonNull(taskTagList)) {
                taskTagRepository.saveAll(taskTagList);
           }
      }
@@ -87,7 +89,7 @@ public class TaskServiceImp implements TaskService {
      @Transactional(readOnly = true)
      public TaskResponse getTask(Long taskId) {
           return taskRepository.findBy(taskId)
-                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found Exception"));
+                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found"));
      }
 
      @Override
@@ -112,12 +114,12 @@ public class TaskServiceImp implements TaskService {
                   .orElseThrow(() -> new MileStoneNotFoundException("MileStone Not Found"));
      }
 
-     private Task taskFindById(Long taskId){
+     private Task taskFindById(Long taskId) {
           return taskRepository.findById(taskId)
-                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found Exception"));
+                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found"));
      }
 
-     private List<TaskTag> tagSetting(List<Long > tagsList, Task task){
+     private List<TaskTag> tagSetting(List<Long> tagsList, Task task) {
           return tagsList.stream()
                   .map(tagId -> {
                        TaskTag taskTag = new TaskTag();

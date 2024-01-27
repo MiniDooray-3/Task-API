@@ -3,11 +3,10 @@ package com.nhnacademy.edu.minidooray.taskapi.service.comment;
 import com.nhnacademy.edu.minidooray.taskapi.domain.Comment;
 import com.nhnacademy.edu.minidooray.taskapi.domain.Member;
 import com.nhnacademy.edu.minidooray.taskapi.domain.Task;
-import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentModifyRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentIdAndContent;
+import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentModifyRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentResponse;
-import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskIdOnly;
 import com.nhnacademy.edu.minidooray.taskapi.exception.CommentNotFoundException;
 import com.nhnacademy.edu.minidooray.taskapi.exception.MemberNotFoundException;
 import com.nhnacademy.edu.minidooray.taskapi.exception.TaskNotFoundException;
@@ -21,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class CommentServiceImp implements CommentService{
+public class CommentServiceImp implements CommentService {
 
      private final CommentRepository commentRepository;
      private final MemberRepository memberRepository;
@@ -36,7 +35,9 @@ public class CommentServiceImp implements CommentService{
                throw new MemberNotFoundException("Member not found");
           }
 
-          Member member = memberRepository.findMemberByMemberIdAndProjectId_ProjectId(commentRegisterRequest.getMemberId(), commentRegisterRequest.getProjectId());
+          Member member =
+                  memberRepository.findMemberByMemberIdAndProjectId_ProjectId(commentRegisterRequest.getMemberId(),
+                          commentRegisterRequest.getProjectId());
           Task task = taskRepository.findById(commentRegisterRequest.getTaskId()).orElseThrow(
                   () -> new TaskNotFoundException("Task Not Found")
           );
@@ -73,11 +74,13 @@ public class CommentServiceImp implements CommentService{
      }
 
      @Override
+     @Transactional(readOnly = true)
      public List<CommentResponse> getComments(Long taskId) {
           return commentRepository.findAllByTaskId(taskId);
      }
 
      @Override
+     @Transactional(readOnly = true)
      public CommentIdAndContent getComment(Long commentId) {
           return commentRepository.findCommentByCommentId(commentId).orElseThrow(
                   () -> new CommentNotFoundException("Comment not found")

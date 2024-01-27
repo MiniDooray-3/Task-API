@@ -15,7 +15,6 @@ public class TaskTagController {
 
     private final TaskTagService taskTagService;
 
-    // TODO  : 추가godigka
     @GetMapping("/api/task/tag/{task_id}")
     public ResponseEntity<List<TagIdAndName>> getTags(@PathVariable("task_id") Long taskId) {
         return ResponseEntity.ok(taskTagService.getTags(taskId));

@@ -4,8 +4,9 @@ public interface TaskTagResponse {
 
      TagDto getTagId();
 
-     interface TagDto{
+     interface TagDto {
           Long getTagId();
+
           String getTagName();
      }
 }

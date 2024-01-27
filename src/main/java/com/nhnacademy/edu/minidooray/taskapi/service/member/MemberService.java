@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface MemberService {
      void createMembers(MemberRegisterRequest registerRequest);
+
      MemberResponse getMember(String memberId, Long projectId);
+
      List<MemberResponse> getMembers(Long projectId);
 }

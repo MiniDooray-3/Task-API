@@ -26,7 +26,7 @@ public class Task {
 
      @Id
      @Column(name = "task_id")
-     @GeneratedValue(strategy= GenerationType.IDENTITY)
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long taskId;
 
      @ManyToOne
@@ -46,14 +46,14 @@ public class Task {
      @OneToMany(mappedBy = "taskId", cascade = {CascadeType.REMOVE})
      private List<TaskTag> tags;
 
-     public Task(MileStone mileStoneId, Project projectId, String taskTitle, String taskContent){
+     public Task(MileStone mileStoneId, Project projectId, String taskTitle, String taskContent) {
           this.mileStone = mileStoneId;
           this.project = projectId;
           this.taskTitle = taskTitle;
           this.taskContent = taskContent;
      }
 
-     public void updateTask(String taskContent, MileStone mileStone, List<TaskTag> tags){
+     public void updateTask(String taskContent, MileStone mileStone, List<TaskTag> tags) {
           this.taskContent = taskContent;
           this.mileStone = mileStone;
           this.tags = tags;

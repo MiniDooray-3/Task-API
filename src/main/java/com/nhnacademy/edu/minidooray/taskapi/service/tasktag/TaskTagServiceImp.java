@@ -1,7 +1,5 @@
 package com.nhnacademy.edu.minidooray.taskapi.service.tasktag;
 
-import com.nhnacademy.edu.minidooray.taskapi.domain.TaskTag;
-import com.nhnacademy.edu.minidooray.taskapi.dto.tag.TagResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.tasktag.TagIdAndName;
 import com.nhnacademy.edu.minidooray.taskapi.exception.TaskNotFoundException;
 import com.nhnacademy.edu.minidooray.taskapi.repository.TaskRepository;
@@ -15,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TaskTagServiceImp implements TaskTagService{
+public class TaskTagServiceImp implements TaskTagService {
 
      private final TaskTagRepository taskTagRepository;
      private final TaskRepository taskRepository;
@@ -23,8 +21,8 @@ public class TaskTagServiceImp implements TaskTagService{
      @Override
      @Transactional(readOnly = true)
      public List<TagIdAndName> getTags(Long taskId) {
-          taskRepository.findById(taskId)
-                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found Exception"));
+          if(!taskRepository.existsById(taskId))
+               throw new TaskNotFoundException("Task Not Found");
 
           List<TagIdAndName> byTaskTagPkTaskId = taskTagRepository.findTagByTaskId(taskId);
 

@@ -1,8 +1,12 @@
 package com.nhnacademy.edu.minidooray.taskapi.dto.milestone;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class MileStoneUpdateRequest {
-     String mileStoneStatus;
+     @NotBlank
+     @Size(max = 10)
+     private String mileStoneStatus;
 }

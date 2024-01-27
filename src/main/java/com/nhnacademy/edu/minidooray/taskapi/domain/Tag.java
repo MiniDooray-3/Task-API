@@ -1,6 +1,7 @@
 package com.nhnacademy.edu.minidooray.taskapi.domain;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,6 @@ public class Tag {
      @JoinColumn(name = "project_id")
      private Project projectId;
 
-     @OneToMany(mappedBy = "tagId")
+     @OneToMany(mappedBy = "tagId", cascade = CascadeType.REMOVE)
      private List<TaskTag> taskTagList;
 }

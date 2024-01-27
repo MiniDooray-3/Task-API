@@ -1,5 +1,6 @@
 package com.nhnacademy.edu.minidooray.taskapi.dto.comment;
 
+import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,5 +9,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CommentModifyRequest {
-    private String commentContent;
+     @NotBlank
+     private String commentContent;
 }

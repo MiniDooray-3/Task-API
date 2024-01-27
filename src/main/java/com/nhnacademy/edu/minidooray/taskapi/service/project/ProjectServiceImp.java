@@ -8,6 +8,7 @@ import com.nhnacademy.edu.minidooray.taskapi.dto.project.ProjectUpdateRequest;
 import com.nhnacademy.edu.minidooray.taskapi.exception.ProjectNotFoundException;
 import com.nhnacademy.edu.minidooray.taskapi.repository.MemberRepository;
 import com.nhnacademy.edu.minidooray.taskapi.repository.ProjectRepository;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,18 +21,20 @@ public class ProjectServiceImp implements ProjectService {
      private final ProjectRepository projectRepository;
      private final MemberRepository memberRepository;
 
+     private static final String PROJECT_NOT_FOUND = "Project Not Found";
+
      @Override
      @Transactional(readOnly = true)
      public ProjectResponse getProjectById(Long projectId) {
           return projectRepository.getProjectBy(projectId)
-                  .orElseThrow(() -> new ProjectNotFoundException("not pound"));
+                  .orElseThrow(() -> new ProjectNotFoundException(PROJECT_NOT_FOUND));
      }
 
      @Override
      @Transactional
      public void updateProjectInfo(ProjectUpdateRequest updateRequest) {
           Project storageProject = projectRepository.findById(updateRequest.getProjectId()).orElseThrow(
-                  () -> new ProjectNotFoundException("Project Not Found Id : " + updateRequest.getProjectId())
+                  () -> new ProjectNotFoundException(PROJECT_NOT_FOUND)
           );
 
 
@@ -42,8 +45,7 @@ public class ProjectServiceImp implements ProjectService {
      @Override
      @Transactional(readOnly = true)
      public List<Project> getProjectList(String memberId) {
-          return projectRepository.getBy(memberId)
-                  .orElseThrow(() -> new ProjectNotFoundException("Project Not Found"));
+          return projectRepository.getBy(memberId).orElse(new ArrayList<>());
      }
 
      @Override

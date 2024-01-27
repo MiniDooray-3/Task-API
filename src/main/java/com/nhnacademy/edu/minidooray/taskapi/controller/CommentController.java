@@ -1,15 +1,18 @@
 package com.nhnacademy.edu.minidooray.taskapi.controller;
 
-import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentModifyRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentIdAndContent;
+import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentModifyRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentResponse;
+import com.nhnacademy.edu.minidooray.taskapi.exception.ValidationFailedException;
 import com.nhnacademy.edu.minidooray.taskapi.service.comment.CommentService;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,14 +29,23 @@ public class CommentController {
 
      @PostMapping("/api/comments")
      @ResponseStatus(HttpStatus.CREATED)
-     public void registerComment(@RequestBody CommentRegisterRequest commentRegisterRequest) {
+     public void registerComment(@Valid @RequestBody CommentRegisterRequest commentRegisterRequest,
+                                 BindingResult bindingResult) {
+          if (bindingResult.hasErrors()) {
+               throw new ValidationFailedException(bindingResult);
+          }
+
           commentService.registerComment(commentRegisterRequest);
      }
 
      @PutMapping("/api/comments/{comment_id}")
      @ResponseStatus(HttpStatus.OK)
-     public ResponseEntity<Long> modifyComment(@RequestBody CommentModifyRequest commentModifyRequest,
-                                     @PathVariable("comment_id") Long commentId) {
+     public ResponseEntity<Long> modifyComment(@Valid @RequestBody CommentModifyRequest commentModifyRequest,
+                                               @PathVariable("comment_id") Long commentId,
+                                               BindingResult bindingResult) {
+          if (bindingResult.hasErrors())
+               throw new ValidationFailedException(bindingResult);
+
           Long taskId = commentService.modifyComment(commentId, commentModifyRequest);
 
           return ResponseEntity.ok(taskId);
