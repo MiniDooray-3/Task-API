@@ -59,11 +59,11 @@ public class TagServiceImp implements TagService {
      private Project projectFindById(Long projectId) {
           return projectRepository.findById(projectId)
                   .orElseThrow(
-                          () -> new ProjectNotFoundException("location : tagService, Project Not Found Exception "));
+                          () -> new ProjectNotFoundException("Project Not Found"));
      }
 
      private Tag tagFindById(Long tagId) {
           return tagRepository.findById(tagId)
-                  .orElseThrow(() -> new TagNotFoundException("location : tagService, Tag Not Found Exception"));
+                  .orElseThrow(() -> new TagNotFoundException("Tag Not Found"));
      }
 }

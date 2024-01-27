@@ -89,7 +89,7 @@ public class TaskServiceImp implements TaskService {
      @Transactional(readOnly = true)
      public TaskResponse getTask(Long taskId) {
           return taskRepository.findBy(taskId)
-                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found Exception"));
+                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found"));
      }
 
      @Override
@@ -116,7 +116,7 @@ public class TaskServiceImp implements TaskService {
 
      private Task taskFindById(Long taskId) {
           return taskRepository.findById(taskId)
-                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found Exception"));
+                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found"));
      }
 
      private List<TaskTag> tagSetting(List<Long> tagsList, Task task) {

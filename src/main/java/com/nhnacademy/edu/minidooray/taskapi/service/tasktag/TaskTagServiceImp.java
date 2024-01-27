@@ -21,8 +21,8 @@ public class TaskTagServiceImp implements TaskTagService {
      @Override
      @Transactional(readOnly = true)
      public List<TagIdAndName> getTags(Long taskId) {
-          taskRepository.findById(taskId)
-                  .orElseThrow(() -> new TaskNotFoundException("Task Not Found Exception"));
+          if(!taskRepository.existsById(taskId))
+               throw new TaskNotFoundException("Task Not Found");
 
           List<TagIdAndName> byTaskTagPkTaskId = taskTagRepository.findTagByTaskId(taskId);
 

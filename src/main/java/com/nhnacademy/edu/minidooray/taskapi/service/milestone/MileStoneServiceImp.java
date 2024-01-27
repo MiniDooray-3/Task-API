@@ -26,7 +26,7 @@ public class MileStoneServiceImp implements MileStoneService {
      @Override
      public void createMileStone(MileStoneRegisterRequest registerRequest) {
 
-          Project storageProject = projectNotFound(registerRequest.getProjectId());
+          Project storageProject = projectFindById(registerRequest.getProjectId());
 
           Optional<MileStone> optionalMileStone = mileStoneRepository
                   .findByMileStoneStatus(registerRequest.getMilestoneStatus());
@@ -42,33 +42,35 @@ public class MileStoneServiceImp implements MileStoneService {
 
      @Override
      public List<MileStoneResponse> getMileStones(Long projectId) {
-          projectNotFound(projectId);
+          projectFindById(projectId);
 
           return mileStoneRepository.findByProjectId_ProjectId(projectId);
      }
 
      @Override
+     @Transactional
      public void updateMileStone(Long mileStoneId, MileStoneUpdateRequest updateRequest) {
-          MileStone storageMileStone = mileStoneRepository.findById(mileStoneId)
-                  .orElseThrow(() -> new MileStoneNotFoundException("MileStone Not Found"));
+          MileStone storageMileStone = mileStoneFindById(mileStoneId);
 
           storageMileStone.setMileStoneStatus(updateRequest.getMileStoneStatus());
-          mileStoneRepository.saveAndFlush(storageMileStone);
      }
 
      @Override
      @Transactional
      public void deleteMileStone(Long mileStoneId) {
-          MileStone storageMileStone = mileStoneRepository.findById(mileStoneId)
-                  .orElseThrow(() -> new MileStoneNotFoundException("MileStone Not Found"));
+          MileStone storageMileStone = mileStoneFindById(mileStoneId);
 
           mileStoneRepository.delete(storageMileStone);
      }
 
-     private Project projectNotFound(Long projectId) {
+     private Project projectFindById(Long projectId) {
           return projectRepository.findById(projectId)
-                  .orElseThrow(() ->
-                          new ProjectNotFoundException("Project Not Found"));
+                  .orElseThrow(() -> new ProjectNotFoundException("Project Not Found"));
+     }
+
+     private MileStone mileStoneFindById(Long mileStoneId){
+          return mileStoneRepository.findById(mileStoneId)
+                  .orElseThrow(() -> new MileStoneNotFoundException("MileStone Not Found"));
      }
 
 }

@@ -74,11 +74,13 @@ public class CommentServiceImp implements CommentService {
      }
 
      @Override
+     @Transactional(readOnly = true)
      public List<CommentResponse> getComments(Long taskId) {
           return commentRepository.findAllByTaskId(taskId);
      }
 
      @Override
+     @Transactional(readOnly = true)
      public CommentIdAndContent getComment(Long commentId) {
           return commentRepository.findCommentByCommentId(commentId).orElseThrow(
                   () -> new CommentNotFoundException("Comment not found")

@@ -1,4 +1,5 @@
-POST localhost:8083/api/projects
+#POST localhost:8083/api/projects
+POST 10.220.222.62:8081/api/projects
 Content-Type: application/json
 
 {
@@ -47,7 +48,7 @@ POST localhost:8083/api/members/register
 Content-Type: application/json
 
 {
-  "memberId" : "reeee",
+  "memberId" : "reeeee",
   "projectId" : 13,
   "memberRole" : "가나다라마바사아x자차"
 }
@@ -68,7 +69,7 @@ Content-Type: application/json
 
 ###
 
-PUT localhost:8083/api/milestones/1
+PUT localhost:8083/api/milestones/6
 Content-Type: application/json
 
 {
