@@ -160,3 +160,36 @@ Content-Type: application/json
 ###
 
 GET localhost:8083/api/task/tag/44
+
+###
+
+POST localhost:8083/api/comments
+Content-Type: application/json
+Accept: application/json
+
+{
+  "content" : "반갑습니다.",
+  "taskId" : 25,
+  "memberId" : "admin",
+  "projectId" : 14
+}
+
+###
+
+GET localhost:8083/api/comments/25
+Accept: application/json
+
+###
+
+GET localhost:8083/api/comment/1
+Accept: application/json
+
+###
+
+PUT localhost:8080/api/comments/1 HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "commentContent" : "등록끝??"
+}

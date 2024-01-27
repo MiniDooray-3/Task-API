@@ -8,6 +8,6 @@ import lombok.Data;
 @Data
 public class TaskUpdateRequest {
      private String taskContent;
-     private Long milestoneId;
+     private Long mileStoneId;
      private List<Long> tagId;
 }
