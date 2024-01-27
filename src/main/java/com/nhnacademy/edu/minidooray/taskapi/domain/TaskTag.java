@@ -32,7 +32,7 @@ public class TaskTag {
      private Task taskId;
 
      @MapsId("tagId")
-     @ManyToOne(cascade = CascadeType.REMOVE)
+     @ManyToOne
      @JoinColumn(name = "tag_id")
      private Tag tagId;
 

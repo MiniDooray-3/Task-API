@@ -64,7 +64,7 @@ public class TaskServiceImp implements TaskService {
      @Transactional
      public void updateTask(Long taskId, TaskUpdateRequest updateRequest) {
           Task storageTask = taskFindById(taskId);
-          if (storageTask.getTags() != null || !storageTask.getTags().isEmpty()) {
+          if (storageTask.getTags() != null) {
                taskTagRepository.deleteByTaskId_TaskId(taskId);
           }
 

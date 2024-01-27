@@ -7,18 +7,19 @@ Content-Type: application/json
 }
 
 ###
-GET 10.220.222.62:8081/api/projects/1
+GET localhost:8083/api/projects/13
 ###
 
-GET 10.220.222.62:8081/api/projects/hello/list
+GET localhost:8083/api/projects/admin/list
 
 ###
-GET 10.220.222.62:8081/api/members/13
-###
 
-GET localhost:8083/api/members/1
+GET localhost:8083/api/projects/14
 
 ###
+GET localhost:8081/api/members/20/16
+###
+
 
 GET localhost:8083/api/projects/13
 
@@ -32,6 +33,9 @@ Content-Type: application/json
   "status": "111줭"
 }
 
+###
+
+GET 10.220.222.62:8081/api/projects/13
 ###
 
 #POST 10.220.222.62:8081/api/members/register
@@ -87,7 +91,7 @@ Content-Type: application/json
 
 ###
 
-GET localhost:8083/api/tags/13
+GET localhost:8081/api/tags/13
 
 ###
 GET 10.220.222.62:8081/api/tags/1
@@ -154,7 +158,7 @@ Content-Type: application/json
 {
   "taskContent" : "변경?",
   "milestoneId" :12,
-  "tagId" : [1]
+  "tagId" : []
 }
 
 ###
