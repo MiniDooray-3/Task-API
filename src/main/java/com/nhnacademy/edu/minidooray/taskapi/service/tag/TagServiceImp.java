@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class TagServiceImp implements TagService{
+public class TagServiceImp implements TagService {
 
      private final TagRepository tagRepository;
      private final ProjectRepository projectRepository;
@@ -42,7 +42,7 @@ public class TagServiceImp implements TagService{
      @Override
      @Transactional
      public void updateTag(Long tagId, TagUpdateRequest updateRequest) {
-          Tag storageTag =tagFindById(tagId);
+          Tag storageTag = tagFindById(tagId);
 
           storageTag.setTagName(updateRequest.getTagName());
           tagRepository.saveAndFlush(storageTag);
@@ -56,13 +56,14 @@ public class TagServiceImp implements TagService{
           tagRepository.delete(storageTag);
      }
 
-     private Project projectFindById(Long projectId){
+     private Project projectFindById(Long projectId) {
           return projectRepository.findById(projectId)
-                  .orElseThrow(() -> new ProjectNotFoundException("location : tagService, Project Not Found Exception "));
+                  .orElseThrow(
+                          () -> new ProjectNotFoundException("location : tagService, Project Not Found Exception "));
      }
 
-     private Tag tagFindById(Long tagId){
+     private Tag tagFindById(Long tagId) {
           return tagRepository.findById(tagId)
-                  .orElseThrow(() -> new TagNotFoundException("location : tagService, Tag Not Found Exception" ));
+                  .orElseThrow(() -> new TagNotFoundException("location : tagService, Tag Not Found Exception"));
      }
 }

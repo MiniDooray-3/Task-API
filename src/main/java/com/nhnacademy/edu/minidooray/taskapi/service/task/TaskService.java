@@ -1,6 +1,5 @@
 package com.nhnacademy.edu.minidooray.taskapi.service.task;
 
-import com.nhnacademy.edu.minidooray.taskapi.domain.Task;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskUpdateRequest;
