@@ -23,16 +23,20 @@ public class MemberServiceImp implements MemberService {
      private final MemberRepository memberRepository;
      private final ProjectRepository projectRepository;
 
+     private static final String PROJECT_NOT_FOUND =  "Project Not Found";
+     private static final String MEMBER_NOT_FOUND =  "Member Not Found";
+     private static final String MEMBER_ALREADY_EXISTS = "Member Already Exists";
+
      @Override
      @Transactional
      public void createMembers(MemberRegisterRequest registerRequest) {
           Project project = projectRepository.findById(registerRequest.getProjectId())
-                  .orElseThrow(() -> new ProjectNotFoundException(
-                          "Project Not Found Id : " + registerRequest.getProjectId()));
+                  .orElseThrow(() -> new ProjectNotFoundException(PROJECT_NOT_FOUND));
+
           MemberResponse memberResponse = memberRepository.findByMemberIdAndProjectId_ProjectId(
                   registerRequest.getMemberId(), registerRequest.getProjectId());
           if (Objects.nonNull(memberResponse)) {
-               throw new MemberAlreadyExistsException("Member Exists Exception");
+               throw new MemberAlreadyExistsException(MEMBER_ALREADY_EXISTS);
           }
 
           Member member = new Member();
@@ -48,8 +52,8 @@ public class MemberServiceImp implements MemberService {
      public MemberResponse getMember(String memberId, Long projectId) {
           MemberResponse memberResponse = memberRepository.findByMemberIdAndProjectId_ProjectId(memberId, projectId);
 
-          if (Objects.isNull(memberResponse)) {
-               throw new MemberNotFoundException("Member Not Found Exception");
+          if (Objects.isNull(memberResponse)) { // member, project
+               throw new MemberNotFoundException(MEMBER_NOT_FOUND);
           }
           return memberResponse;
      }
@@ -58,7 +62,7 @@ public class MemberServiceImp implements MemberService {
      @Transactional(readOnly = true)
      public List<MemberResponse> getMembers(Long projectId) {
           Project project = projectRepository.findById(projectId)
-                  .orElseThrow(() -> new ProjectNotFoundException("Project Not Found Id"));
+                  .orElseThrow(() -> new ProjectNotFoundException(PROJECT_NOT_FOUND));
           return memberRepository.findByProjectId(project);
      }
 }

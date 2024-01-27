@@ -68,7 +68,7 @@ public class MileStoneServiceImp implements MileStoneService {
      private Project projectNotFound(Long projectId) {
           return projectRepository.findById(projectId)
                   .orElseThrow(() ->
-                          new ProjectNotFoundException("location : milestoneCreate, Project Not Found Exception"));
+                          new ProjectNotFoundException("Project Not Found"));
      }
 
 }

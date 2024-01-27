@@ -4,13 +4,16 @@ import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskUpdateRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TasksResponse;
+import com.nhnacademy.edu.minidooray.taskapi.exception.ValidationFailedException;
 import com.nhnacademy.edu.minidooray.taskapi.service.task.TaskService;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,15 +42,22 @@ public class TaskController {
 
      @PostMapping("/api/tasks")
      @ResponseStatus(HttpStatus.CREATED)
-     public void postTasks(@RequestBody TaskRegisterRequest registerRequest) {
+     public void postTasks(@Valid @RequestBody TaskRegisterRequest registerRequest,
+                           BindingResult bindingResult) {
+          if (bindingResult.hasErrors())
+               throw new ValidationFailedException(bindingResult);
+
           taskService.createTask(registerRequest);
      }
 
      @PutMapping("/api/tasks/{task_id}")
      @ResponseStatus(HttpStatus.OK)
      public void putTasks(@PathVariable("task_id") Long taskId,
-                          @RequestBody TaskUpdateRequest updateRequest
-     ) {
+                          @Valid @RequestBody TaskUpdateRequest updateRequest,
+                          BindingResult bindingResult) {
+          if (bindingResult.hasErrors())
+               throw new ValidationFailedException(bindingResult);
+
           taskService.updateTask(taskId, updateRequest);
      }
 

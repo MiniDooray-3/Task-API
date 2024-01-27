@@ -2,12 +2,15 @@ package com.nhnacademy.edu.minidooray.taskapi.controller;
 
 import com.nhnacademy.edu.minidooray.taskapi.dto.member.MemberRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.member.MemberResponse;
+import com.nhnacademy.edu.minidooray.taskapi.exception.ValidationFailedException;
 import com.nhnacademy.edu.minidooray.taskapi.service.member.MemberService;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +26,11 @@ public class MemberController {
 
      @PostMapping("/api/members/register")
      @ResponseStatus(HttpStatus.CREATED)
-     public void postMembers(@RequestBody MemberRegisterRequest registerRequest) {
+     public void postMembers(@Valid  @RequestBody MemberRegisterRequest registerRequest,
+                             BindingResult bindingResult) {
+          if (bindingResult.hasErrors())
+               throw new ValidationFailedException(bindingResult);
+
           memberService.createMembers(registerRequest);
      }
 
