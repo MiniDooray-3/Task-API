@@ -1,6 +1,7 @@
 package com.nhnacademy.edu.minidooray.taskapi.domain;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
@@ -11,8 +12,14 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Entity
 @Table(name = "task_tag")
 public class TaskTag {
@@ -26,7 +33,7 @@ public class TaskTag {
      private Task taskId;
 
      @MapsId("tagId")
-     @ManyToOne
+     @ManyToOne (cascade = CascadeType.REMOVE)
      @JoinColumn(name = "tag_id")
      private Tag tagId;
 
