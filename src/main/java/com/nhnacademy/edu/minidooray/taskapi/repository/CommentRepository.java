@@ -2,7 +2,6 @@ package com.nhnacademy.edu.minidooray.taskapi.repository;
 
 import com.nhnacademy.edu.minidooray.taskapi.domain.Comment;
 import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentIdAndContent;
-import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentOnlyIdResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentResponse;
 import java.util.List;
 import java.util.Optional;

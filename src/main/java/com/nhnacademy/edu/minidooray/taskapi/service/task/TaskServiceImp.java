@@ -5,7 +5,6 @@ import com.nhnacademy.edu.minidooray.taskapi.domain.MileStone;
 import com.nhnacademy.edu.minidooray.taskapi.domain.Project;
 import com.nhnacademy.edu.minidooray.taskapi.domain.Task;
 import com.nhnacademy.edu.minidooray.taskapi.domain.TaskTag;
-import com.nhnacademy.edu.minidooray.taskapi.dto.comment.CommentOnlyIdResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskResponse;
 import com.nhnacademy.edu.minidooray.taskapi.dto.task.TaskUpdateRequest;
