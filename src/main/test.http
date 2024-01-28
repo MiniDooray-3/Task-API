@@ -15,18 +15,10 @@ GET localhost:8083/api/projects/admin/list
 
 ###
 
-GET localhost:8083/api/projects/14
-
 ###
 GET localhost:8081/api/members/20/16
 ###
 
-POST
-
-###
-
-
-GET localhost:8083/api/projects/13
 
 ###
 
@@ -128,8 +120,6 @@ Content-Type: application/json
 ###
 DELETE localhost:8083/api/tasks/1
 ###
-#PUT localhost:8083/api/tasks/2
-#Content-Type: application/json
 
 ###
 GET localhost:8083/api/tasks/13
@@ -185,22 +175,17 @@ Accept: application/json
 
 ###
 
-GET localhost:8083/api/comments/25
-Accept: application/json
-
-###
-
 GET localhost:8083/api/comment/5
 Accept: application/json
 
 ###
 
-PUT localhost:8083/api/comments/5 HTTP/1.1
+PUT localhost:8083/api/comments/5
 Content-Type: application/json
 Accept: application/json
 
 {
-  "commentContent" : "test??"
+  "commentContent" : ""
 }
 
 ###
