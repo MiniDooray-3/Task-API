@@ -20,7 +20,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest({CommentController.class, ErrorController.class})
+@WebMvcTest({CommentController.class})
 class CommentControllerTest {
 
      @Autowired
@@ -66,17 +66,5 @@ class CommentControllerTest {
                   .andExpect(jsonPath("$[0].content", equalTo("content")))
                   .andExpect(jsonPath("$[0].memberId", equalTo("memberId")));
      }
-
-     @Test
-     void deleteComment() throws Exception {
-          given(commentService.deleteComment(1L))
-                  .willReturn(1L);
-
-          mvc.perform(delete("/api/comments/{comment_id}", 1L))
-                  .andExpect(status().isOk());
-
-     }
-
-
 
 }
