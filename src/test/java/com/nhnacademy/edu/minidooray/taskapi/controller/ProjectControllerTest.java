@@ -131,29 +131,4 @@ class ProjectControllerTest {
                           .contentType(MediaType.APPLICATION_JSON))
                   .andExpect(status().is4xxClientError());
      }
-//     @Test
-//     @DisplayName("실패 : 프로젝트 개별 조회")
-//     void getProjectFail() throws Exception {
-//          given(projectService.getProjectById(anyLong()))
-//                  .willReturn(new ProjectResponse() {
-//                       @Override
-//                       public Long getProjectId() {
-//                            return null;
-//                       }
-//
-//                       @Override
-//                       public String getProjectName() {
-//                            return "projectName";
-//                       }
-//
-//                       @Override
-//                       public String getProjectStatus() {
-//                            return "status";
-//                       }
-//                  });
-//
-//          mvc.perform(get("/api/projects/{project_id}", anyLong()))
-//                  .andExpect(status().isNotFound());
-//
-//     }
 }
