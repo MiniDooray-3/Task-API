@@ -17,39 +17,39 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 @DataJpaTest
 class ProjectRepositoryTest {
 
-    @Autowired
-    TestEntityManager entityManager;
+     @Autowired
+     TestEntityManager entityManager;
 
-    @Autowired
-    ProjectRepository projectRepository;
+     @Autowired
+     ProjectRepository projectRepository;
 
-    @Test
-    void testGetProjectBy() {
-        Project project = new Project(null, "testProject", "활성");
-        Project merge = entityManager.merge(project);
+     @Test
+     void testGetProjectBy() {
+          Project project = new Project(null, "testProject", "활성");
+          Project merge = entityManager.merge(project);
 
-        ProjectResponse projectResponse = projectRepository.getProjectBy(merge.getProjectId()).orElse(null);
+          ProjectResponse projectResponse = projectRepository.getProjectBy(merge.getProjectId()).orElse(null);
 
-        assertAll(
-                () -> assertEquals("testProject", projectResponse.getProjectName()),
-                () -> assertEquals("활성", projectResponse.getProjectStatus())
-        );
-    }
+          assertAll(
+                  () -> assertEquals("testProject", projectResponse.getProjectName()),
+                  () -> assertEquals("활성", projectResponse.getProjectStatus())
+          );
+     }
 
 
-    @Test
-    void testGetBy() {
+     @Test
+     void testGetBy() {
 
-        Project project = new Project(null, "testProject", "활성");
-        Project merge = entityManager.merge(project);
-        entityManager.merge(new Member(1L, merge, "test", "ADMIN"));
-        List<Project> projects = projectRepository.getBy("test").orElse(null);
+          Project project = new Project(null, "testProject", "활성");
+          Project merge = entityManager.merge(project);
+          entityManager.merge(new Member(1L, merge, "test", "ADMIN"));
+          List<Project> projects = projectRepository.getBy("test").orElse(null);
 
-        assertAll(
-                () -> assertNotNull(projects),
-                () -> assertThat(projects).hasSize(1),
-                () -> assertEquals("testProject", projects.get(0).getProjectName())
-        );
-    }
+          assertAll(
+                  () -> assertNotNull(projects),
+                  () -> assertThat(projects).hasSize(1),
+                  () -> assertEquals("testProject", projects.get(0).getProjectName())
+          );
+     }
 
 }

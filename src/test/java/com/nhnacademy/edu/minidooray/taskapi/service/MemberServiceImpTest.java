@@ -1,4 +1,4 @@
-package com.nhnacademy.edu.minidooray.taskapi.service.member;
+package com.nhnacademy.edu.minidooray.taskapi.service;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -14,6 +14,7 @@ import com.nhnacademy.edu.minidooray.taskapi.exception.MemberAlreadyExistsExcept
 import com.nhnacademy.edu.minidooray.taskapi.exception.ProjectNotFoundException;
 import com.nhnacademy.edu.minidooray.taskapi.repository.MemberRepository;
 import com.nhnacademy.edu.minidooray.taskapi.repository.ProjectRepository;
+import com.nhnacademy.edu.minidooray.taskapi.service.member.MemberService;
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

@@ -22,76 +22,76 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class CommentRepositoryTest {
 
-    @Autowired
-    TestEntityManager entityManager;
+     @Autowired
+     TestEntityManager entityManager;
 
-    @Autowired
-    CommentRepository commentRepository;
+     @Autowired
+     CommentRepository commentRepository;
 
-    @Test
-    void testFindAllByTaskId() {
-        Project project = new Project(null, "test", "활성");
-        Project mergeProject = entityManager.merge(project);
+     @Test
+     void testFindAllByTaskId() {
+          Project project = new Project(null, "test", "활성");
+          Project mergeProject = entityManager.merge(project);
 
-        Task task = new Task(null, null, mergeProject, "title", "content", null);
-        Task mergeTask = entityManager.merge(task);
+          Task task = new Task(null, null, mergeProject, "title", "content", null);
+          Task mergeTask = entityManager.merge(task);
 
-        Member member = new Member(null, mergeProject, "test", "ADMIN");
-        Member mergeMember = entityManager.merge(member);
+          Member member = new Member(null, mergeProject, "test", "ADMIN");
+          Member mergeMember = entityManager.merge(member);
 
-        Comment comment = new Comment(null, mergeTask, mergeMember, "content");
-        Comment merge = entityManager.merge(comment);
+          Comment comment = new Comment(null, mergeTask, mergeMember, "content");
+          Comment merge = entityManager.merge(comment);
 
-        List<CommentResponse> result = commentRepository.findAllByTaskId(mergeTask.getTaskId());
+          List<CommentResponse> result = commentRepository.findAllByTaskId(mergeTask.getTaskId());
 
-        assertAll(
-                () -> assertThat(result).hasSize(1)
-        );
-    }
+          assertAll(
+                  () -> assertThat(result).hasSize(1)
+          );
+     }
 
 
-    @Test
-    void testFindCommentByCommentId() {
-        Project project = new Project(null, "test", "활성");
-        Project mergeProject = entityManager.merge(project);
+     @Test
+     void testFindCommentByCommentId() {
+          Project project = new Project(null, "test", "활성");
+          Project mergeProject = entityManager.merge(project);
 
-        Task task = new Task(null, null, mergeProject, "title", "content", null);
-        Task mergeTask = entityManager.merge(task);
+          Task task = new Task(null, null, mergeProject, "title", "content", null);
+          Task mergeTask = entityManager.merge(task);
 
-        Member member = new Member(null, mergeProject, "test", "ADMIN");
-        Member mergeMember = entityManager.merge(member);
+          Member member = new Member(null, mergeProject, "test", "ADMIN");
+          Member mergeMember = entityManager.merge(member);
 
-        Comment comment = new Comment(null, mergeTask, mergeMember, "content");
-        Comment merge = entityManager.merge(comment);
+          Comment comment = new Comment(null, mergeTask, mergeMember, "content");
+          Comment merge = entityManager.merge(comment);
 
-        CommentIdAndContent result = commentRepository.findCommentByCommentId(merge.getCommentId()).orElse(null);
+          CommentIdAndContent result = commentRepository.findCommentByCommentId(merge.getCommentId()).orElse(null);
 
-        assertAll(
-                () -> assertNotNull(result),
-                () -> assertEquals("content", result.getCommentContent())
-        );
-    }
+          assertAll(
+                  () -> assertNotNull(result),
+                  () -> assertEquals("content", result.getCommentContent())
+          );
+     }
 
-    @Test
-    void testFindByTaskId(){
-        Project project = new Project(null, "test", "활성");
-        Project mergeProject = entityManager.merge(project);
+     @Test
+     void testFindByTaskId() {
+          Project project = new Project(null, "test", "활성");
+          Project mergeProject = entityManager.merge(project);
 
-        Task task = new Task(null, null, mergeProject, "title", "content", null);
-        Task mergeTask = entityManager.merge(task);
+          Task task = new Task(null, null, mergeProject, "title", "content", null);
+          Task mergeTask = entityManager.merge(task);
 
-        Member member = new Member(null, mergeProject, "test", "ADMIN");
-        Member mergeMember = entityManager.merge(member);
+          Member member = new Member(null, mergeProject, "test", "ADMIN");
+          Member mergeMember = entityManager.merge(member);
 
-        Comment comment = new Comment(null, mergeTask, mergeMember, "content");
-        entityManager.merge(comment);
+          Comment comment = new Comment(null, mergeTask, mergeMember, "content");
+          entityManager.merge(comment);
 
-        List<Comment> comments = commentRepository.findByTaskId(mergeTask.getTaskId());
+          List<Comment> comments = commentRepository.findByTaskId(mergeTask.getTaskId());
 
-        assertAll(
-                () -> assertThat(comments).hasSize(1),
-                () -> assertEquals("content", comments.get(0).getCommentContent())
-        );
+          assertAll(
+                  () -> assertThat(comments).hasSize(1),
+                  () -> assertEquals("content", comments.get(0).getCommentContent())
+          );
 
-    }
+     }
 }
