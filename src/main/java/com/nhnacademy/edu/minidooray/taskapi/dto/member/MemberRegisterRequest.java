@@ -13,6 +13,6 @@ public class MemberRegisterRequest {
      private Long projectId;
 
      @NotBlank
-     @Size(max = 5)
+     @Size(max = 6)
      private String memberRole;
 }

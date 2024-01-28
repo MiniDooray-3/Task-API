@@ -1,6 +1,5 @@
 package com.nhnacademy.edu.minidooray.taskapi.controller;
 
-import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import com.nhnacademy.edu.minidooray.taskapi.domain.Project;
 import com.nhnacademy.edu.minidooray.taskapi.dto.project.ProjectRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.project.ProjectResponse;
@@ -43,8 +42,9 @@ public class ProjectController {
      @ResponseStatus(HttpStatus.CREATED)
      public void createProject(@Valid @RequestBody ProjectRegisterRequest registerRequest,
                                BindingResult bindingResult) {
-          if(bindingResult.hasErrors())
+          if (bindingResult.hasErrors()) {
                throw new ValidationFailedException(bindingResult);
+          }
 
           projectService.createProject(registerRequest);
      }
@@ -53,8 +53,9 @@ public class ProjectController {
      @ResponseStatus(HttpStatus.OK)
      public void updateProject(@Valid @RequestBody ProjectUpdateRequest updateRequest,
                                BindingResult bindingResult) {
-          if(bindingResult.hasErrors())
+          if (bindingResult.hasErrors()) {
                throw new ValidationFailedException(bindingResult);
+          }
 
           projectService.updateProjectInfo(updateRequest);
      }

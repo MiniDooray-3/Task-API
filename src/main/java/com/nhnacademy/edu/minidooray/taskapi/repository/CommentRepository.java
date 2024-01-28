@@ -17,4 +17,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<CommentResponse> findAllByTaskId(Long taskId);
 
     Optional<CommentIdAndContent> findCommentByCommentId(Long commentId);
+
+    @Query("select c from Comment c where c.taskId.taskId = ?1")
+    List<Comment> findByTaskId(Long taskId);
 }

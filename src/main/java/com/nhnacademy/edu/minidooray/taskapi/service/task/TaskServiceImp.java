@@ -1,5 +1,6 @@
 package com.nhnacademy.edu.minidooray.taskapi.service.task;
 
+import com.nhnacademy.edu.minidooray.taskapi.domain.Comment;
 import com.nhnacademy.edu.minidooray.taskapi.domain.MileStone;
 import com.nhnacademy.edu.minidooray.taskapi.domain.Project;
 import com.nhnacademy.edu.minidooray.taskapi.domain.Task;
@@ -11,6 +12,7 @@ import com.nhnacademy.edu.minidooray.taskapi.dto.task.TasksResponse;
 import com.nhnacademy.edu.minidooray.taskapi.exception.MileStoneNotFoundException;
 import com.nhnacademy.edu.minidooray.taskapi.exception.ProjectNotFoundException;
 import com.nhnacademy.edu.minidooray.taskapi.exception.TaskNotFoundException;
+import com.nhnacademy.edu.minidooray.taskapi.repository.CommentRepository;
 import com.nhnacademy.edu.minidooray.taskapi.repository.MileStoneRepository;
 import com.nhnacademy.edu.minidooray.taskapi.repository.ProjectRepository;
 import com.nhnacademy.edu.minidooray.taskapi.repository.TagRepository;
@@ -34,6 +36,7 @@ public class TaskServiceImp implements TaskService {
      private final MileStoneRepository mileStoneRepository;
      private final TagRepository tagRepository;
      private final TaskTagRepository taskTagRepository;
+     private final CommentRepository commentRepository;
 
      @Override
      @Transactional
@@ -101,6 +104,9 @@ public class TaskServiceImp implements TaskService {
      @Transactional
      public void deleteTask(Long taskId) {
           Task storageTask = taskFindById(taskId);
+          List<Comment> list = commentRepository.findByTaskId(taskId);
+
+          commentRepository.deleteAll(list);
           taskRepository.delete(storageTask);
      }
 

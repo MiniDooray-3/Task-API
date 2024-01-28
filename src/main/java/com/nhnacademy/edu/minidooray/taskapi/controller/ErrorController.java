@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ErrorController {
 
      private static final String ERROR = "errorMessage";
+
      @ExceptionHandler(value = {
              ProjectAlreadyExistsException.class, MemberAlreadyExistsException.class,
              MileStoneStatusAlreadyExistsException.class
@@ -51,7 +51,7 @@ public class ErrorController {
              ValidationFailedException.class
      })
      public ResponseEntity<RuntimeException> handleValidationException(RuntimeException e) {
-          log.error("{}", e.getMessage());
+          log.error("validException : {}", e.getMessage());
           return ResponseEntity
                   .status(HttpStatus.BAD_REQUEST)
                   .header(ERROR, e.getMessage())
