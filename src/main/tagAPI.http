@@ -1,0 +1,26 @@
+// 태그 생성
+POST 10.220.222.62:8081/api/tags
+Content-Type: application/json
+
+{
+  "tagName": "positive2",
+  "projectId": 26
+}
+
+###
+// 태그 조회
+GET 10.220.222.62:8081/api/tags/26
+
+###
+// 태그 수정
+PUT 10.220.222.62:8081/api/tags/23
+Content-Type: application/json
+
+{
+  "tagName" : "update"
+}
+
+###
+// 태그 삭제
+// ? -> 삭제할 값 지정
+DELETE 10.220.222.62:8081/api/tags/?;

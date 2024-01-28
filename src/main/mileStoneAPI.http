@@ -1,0 +1,26 @@
+// 마일스톤 등록
+POST 10.220.222.62:8081/api/milestones
+Content-Type: application/json
+
+{
+  "projectId" : 26,
+  "milestoneStatus" : "ing"
+}
+
+###
+// 마일스톤 조회
+GET 10.220.222.62:8081/api/milestones/26
+
+###
+// 마일스톤 수정
+PUT 10.220.222.62:8081/api/milestones/15
+Content-Type: application/json
+
+{
+  "mileStoneStatus" : "update"
+}
+
+###
+// 마일스톤 삭제
+// ? -> 삭제할 값 넣기
+DELETE 10.220.222.62:8081/api/milestones/?;
