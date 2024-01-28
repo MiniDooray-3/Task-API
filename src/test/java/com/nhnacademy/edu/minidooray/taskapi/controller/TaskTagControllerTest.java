@@ -34,16 +34,9 @@ class TaskTagControllerTest {
      @MockBean
      private TaskTagService taskTagService;
 
-     @MockBean
-     private TaskService taskService;
-
-     @Mock
-     private TaskRegisterRequest task;
-
      @Test
      @DisplayName("성공 : 업무 태그 조회")
      void  getTaskTag() throws Exception {
-          taskService.createTask(task);
           given(taskTagService.getTags(1L))
                   .willReturn(List.of(new TagIdAndName("tagName", 1L)));
 

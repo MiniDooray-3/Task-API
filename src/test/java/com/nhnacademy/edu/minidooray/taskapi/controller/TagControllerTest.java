@@ -107,11 +107,6 @@ class TagControllerTest {
      @Test
      @DisplayName("실패(validation error) : 태그 수정")
      void putTagFail() throws Exception {
-          TagRegisterRequest registerRequest = new TagRegisterRequest();
-          registerRequest.setTagName("tagName");
-          registerRequest.setProjectId(1L);
-          tagService.createTag(registerRequest);
-
           TagUpdateRequest updateRequest = new TagUpdateRequest();
 
           mvc.perform(put("/api/tags/{tag_id}", 1L)

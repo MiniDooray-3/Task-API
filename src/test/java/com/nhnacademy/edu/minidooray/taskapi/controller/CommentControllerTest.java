@@ -55,6 +55,7 @@ class CommentControllerTest {
      }
 
      @Test
+     @DisplayName("성공 : 댓글 전체 목록")
      void getComments() throws Exception {
           given(commentService.getComments(1L))
                   .willReturn(List.of(new CommentResponse(1L, "content", "memberId")));
@@ -66,5 +67,9 @@ class CommentControllerTest {
                   .andExpect(jsonPath("$[0].content", equalTo("content")))
                   .andExpect(jsonPath("$[0].memberId", equalTo("memberId")));
      }
+
+//     @Test
+//     @DisplayName("성공 : 댓글 등록")
+//
 
 }
