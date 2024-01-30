@@ -1,0 +1,17 @@
+// 멤버 등록
+POST 10.220.222.62:8081/api/members/register
+Content-Type: application/json
+
+{
+  "memberId" : "sec_user",
+  "projectId" : 26,
+  "memberRole" : "MEMBER"
+}
+
+###
+// 멤버 전체 조회
+GET 10.220.222.62:8081/api/members/sec_user/26
+
+###
+// 멤버 조회
+GET 10.220.222.62:8081/api/members/26

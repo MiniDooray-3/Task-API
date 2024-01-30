@@ -1,0 +1,26 @@
+// 프로젝트 생성
+POST 10.220.222.62:8081/api/projects
+Content-Type: application/json
+
+{
+  "projectName": "first Project",
+  "memberId": "admin"
+}
+
+###
+// 프로젝트 수정
+PUT 10.220.222.62:8081/api/projects
+Content-Type: application/json
+
+{
+  "projectId": 26,
+  "status": "휴먼"
+}
+
+###
+// 프로젝트 개별 조회
+GET 10.220.222.62:8081/api/projects/26
+
+###
+// 프로젝트 전체 조회
+GET 10.220.222.62:8081/api/projects/admin/list

@@ -40,8 +40,8 @@ public class CommentController {
 
      @PutMapping("/api/comments/{comment_id}")
      @ResponseStatus(HttpStatus.OK)
-     public ResponseEntity<Long> modifyComment(@Valid @RequestBody CommentModifyRequest commentModifyRequest,
-                                               @PathVariable("comment_id") Long commentId,
+     public ResponseEntity<Long> modifyComment(@PathVariable("comment_id") Long commentId,
+                                               @Valid @RequestBody CommentModifyRequest commentModifyRequest,
                                                BindingResult bindingResult) {
           if (bindingResult.hasErrors())
                throw new ValidationFailedException(bindingResult);

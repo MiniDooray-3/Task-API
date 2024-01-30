@@ -1,0 +1,32 @@
+// 댓글 등록
+POST 10.220.222.62:8081/api/comments
+Content-Type: application/json
+
+{
+  "content" : "bye",
+  "taskId" : 49,
+  "memberId" : "sec_user",
+  "projectId" : 26
+}
+
+###
+// 댓글 조회
+GET 10.220.222.62:8081/api/comments/49
+
+###
+//댓글 단일 조회
+GET 10.220.222.62:8081/api/comment/42
+
+###
+// 댓글 수정
+PUT 10.220.222.62:8081/api/comments/42
+Content-Type: application/json
+
+{
+  "commentContent" : "changeContent"
+}
+
+###
+// 댓글 삭제
+// ? -> 삭제할 댓글 지정
+DELETE 10.220.222.62:8081/api/comments/?;

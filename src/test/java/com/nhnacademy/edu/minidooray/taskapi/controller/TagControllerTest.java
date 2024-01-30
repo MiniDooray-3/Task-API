@@ -1,11 +1,8 @@
 package com.nhnacademy.edu.minidooray.taskapi.controller;
 
-import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -13,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.edu.minidooray.taskapi.dto.tag.TagRegisterRequest;
 import com.nhnacademy.edu.minidooray.taskapi.dto.tag.TagResponse;
@@ -59,13 +55,13 @@ class TagControllerTest {
           mvc.perform(MockMvcRequestBuilders.get("/api/tags/{project_id}", anyLong()))
                   .andExpect(status().isOk())
                   .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                  .andExpect(jsonPath("$[0].tagId",equalTo(1)))
+                  .andExpect(jsonPath("$[0].tagId", equalTo(1)))
                   .andExpect(jsonPath("$[0].tagName", equalTo("업무")));
      }
 
      @Test
      @DisplayName("성공 : 태그등록")
-     void postTag() throws Exception{
+     void postTag() throws Exception {
           TagRegisterRequest registerRequest = new TagRegisterRequest();
           registerRequest.setTagName("exit");
           registerRequest.setProjectId(1L);
@@ -78,7 +74,7 @@ class TagControllerTest {
 
      @Test
      @DisplayName("실패(validation error) : 태그등록")
-     void postTagFail() throws Exception{
+     void postTagFail() throws Exception {
           TagRegisterRequest registerRequest = new TagRegisterRequest();
 
           mvc.perform(post("/api/tags")
@@ -90,11 +86,6 @@ class TagControllerTest {
      @Test
      @DisplayName("성공 : 태그 수정")
      void putTag() throws Exception {
-          TagRegisterRequest registerRequest = new TagRegisterRequest();
-          registerRequest.setTagName("tagName");
-          registerRequest.setProjectId(1L);
-          tagService.createTag(registerRequest);
-
           TagUpdateRequest updateRequest = new TagUpdateRequest();
           updateRequest.setTagName("change");
 
